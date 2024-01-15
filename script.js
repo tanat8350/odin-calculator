@@ -4,15 +4,70 @@ let operator = "";
 
 function operate(num1, num2, operator) {
   let result = 0;
-  operator === "+" ? (result = num1 + num2) : "";
-  operator === "-" ? (result = num1 - num2) : "";
-  operator === "*" ? (result = num1 * num2) : "";
-  operator === "/" ? (result = num1 / num2) : "";
-  !operator ? (result = num2) : "";
+  if (operator === "+") result = num1 + num2;
+  if (operator === "-") result = num1 - num2;
+  if (operator === "*") result = num1 * num2;
+  if (operator === "/") result = num1 / num2;
+
+  if (!operator) result = num2;
   calDisplay.textContent = result;
   calDisplay.classList.add("js-result");
   return result;
 }
+
+function clearCal() {
+  calDisplay.textContent = "";
+  calLatest.textContent = "";
+  num1 = num2 = 0;
+  operator = "";
+}
+
+function delChar() {
+  calDisplay.textContent = calDisplay.textContent.slice(0, -1);
+}
+
+function calculate() {
+  num2 = +calDisplay.textContent;
+  if (operator) {
+    calLatest.textContent = `${num1} ${operator} ${num2} =`;
+  } else {
+    calLatest.textContent = `= ${num2}`;
+  }
+  operate(num1, num2, operator);
+  num1 = +calDisplay.textContent;
+  operator = "";
+}
+
+function addOperator(op) {
+  if (operator === "") {
+    num1 = +calDisplay.textContent;
+    operator = op;
+    calLatest.textContent = `${num1} ${operator}`;
+    calDisplay.classList.add("js-result");
+  } else {
+    num2 = +calDisplay.textContent;
+    num1 = operate(num1, num2, operator);
+    operator = op;
+    calLatest.textContent = `${num1} ${operator}`;
+  }
+}
+
+function appendDecimal() {
+  if (!calDisplay.textContent.includes(".")) {
+    calDisplay.textContent += ".";
+  }
+}
+
+function appendNumber(num) {
+  if (calDisplay.classList.contains("js-result")) {
+    calDisplay.textContent = num;
+    calDisplay.classList.remove("js-result");
+  } else {
+    calDisplay.textContent += num;
+  }
+}
+
+const body = document.body;
 
 const calDisplay = document.querySelector("#cal-display");
 const calLatest = document.querySelector("#cal-latest");
@@ -26,42 +81,34 @@ buttonContainer.addEventListener("click", (e) => {
   }
 
   if (target.id === "clear-btn") {
-    calDisplay.textContent = "";
-    calLatest.textContent = "";
-    num1 = num2 = 0;
-    operator = "";
+    clearCal();
+    target.blur();
   } else if (target.id === "del-btn") {
-    calDisplay.textContent = calDisplay.textContent.slice(0, -1);
+    delChar();
+    target.blur();
   } else if (target.classList.contains("js-equal")) {
-    num2 = +calDisplay.textContent;
-    if (operator) {
-      calLatest.textContent = `${num1} ${operator} ${num2} =`;
-    } else {
-      calLatest.textContent = `= ${num2}`;
-    }
-    operate(num1, num2, operator);
-    num1 = +calDisplay.textContent;
-    operator = "";
+    calculate();
+    target.blur();
   } else if (target.classList.contains("js-operator")) {
-    if (operator === "") {
-      num1 = +calDisplay.textContent;
-      operator = target.textContent;
-      calLatest.textContent = `${num1} ${operator}`;
-      calDisplay.classList.add("js-result");
-    } else {
-      num2 = +calDisplay.textContent;
-      num1 = operate(num1, num2, operator);
-      operator = target.textContent;
-      calLatest.textContent = `${num1} ${operator}`;
-    }
+    addOperator(target.textContent);
+    target.blur();
   } else if (target.classList.contains("js-decimal")) {
-    if (!calDisplay.textContent.includes(".")) {
-      calDisplay.textContent += target.textContent;
-    }
-  } else if (calDisplay.classList.contains("js-result")) {
-    calDisplay.textContent = target.textContent;
-    calDisplay.classList.remove("js-result");
+    appendDecimal();
+    target.blur();
   } else {
-    calDisplay.textContent += target.textContent;
+    appendNumber(target.textContent);
+    target.blur();
   }
+});
+
+body.addEventListener("keydown", (e) => {
+  const key = e.key;
+
+  if (key === "Delete") clearCal();
+  if (key === "Backspace") delChar();
+  if (key === "Enter") calculate();
+  if (key === "+" || key === "-" || key === "*" || key === "/")
+    addOperator(key);
+  if (key === ".") appendDecimal();
+  if (key >= 0 && key <= 9) appendNumber(key);
 });

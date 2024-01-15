@@ -36,6 +36,7 @@ h1 {
 #display > p {
   font-size: 2rem;
   text-align: end;
+  overflow: hidden;
 }
 
 #button-container {
