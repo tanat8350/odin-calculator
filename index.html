@@ -5,49 +5,52 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Odin Calculator</title>
+  <link rel="stylesheet" href="style.css">
   <script src="./script.js" defer></script>
 </head>
 
 <body>
   <h1>Odin Calculator</h1>
 
-  <div>
-    <p id="cal-latest"></p>
-    <p id="cal-display"></p>
-  </div>
-
-  <div id="button-container">
-    <div>
-      <button>7</button>
-      <button>8</button>
-      <button>9</button>
-      <button class="js-operator">/</button>
+  <div id="calculator">
+    <div id="display">
+      <p id="cal-latest"></p>
+      <p id="cal-display"></p>
     </div>
 
-    <div>
-      <button>4</button>
-      <button>5</button>
-      <button>6</button>
-      <button class="js-operator">*</button>
-    </div>
+    <div id="button-container">
+      <div class="only-2-btns">
+        <button id="del-btn" class="btn-2">Delete</button>
+        <button id="clear-btn" class="btn-2">Clear</button>
+      </div>
 
-    <div>
-      <button>1</button>
-      <button>2</button>
-      <button>3</button>
-      <button class="js-operator">-</button>
-    </div>
+      <div>
+        <button>7</button>
+        <button>8</button>
+        <button>9</button>
+        <button class="js-operator btn-2">/</button>
+      </div>
 
-    <div>
-      <button>0</button>
-      <button class="js-decimal">.</button>
-      <button class="js-equal">=</button>
-      <button class="js-operator">+</button>
-    </div>
+      <div>
+        <button>4</button>
+        <button>5</button>
+        <button>6</button>
+        <button class="js-operator btn-2">*</button>
+      </div>
 
-    <div>
-      <button id="del-btn">Delete</button>
-      <button id="clear-btn">Clear</button>
+      <div>
+        <button>1</button>
+        <button>2</button>
+        <button>3</button>
+        <button class="js-operator btn-2">-</button>
+      </div>
+
+      <div>
+        <button>0</button>
+        <button class="js-decimal">.</button>
+        <button class="js-equal btn-3">=</button>
+        <button class="js-operator btn-2">+</button>
+      </div>
     </div>
   </div>
 </body>

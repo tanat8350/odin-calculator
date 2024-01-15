@@ -21,6 +21,10 @@ const buttonContainer = document.querySelector("#button-container");
 buttonContainer.addEventListener("click", (e) => {
   const target = e.target;
 
+  if (target.nodeName !== "BUTTON") {
+    return;
+  }
+
   if (target.id === "clear-btn") {
     calDisplay.textContent = "";
     calLatest.textContent = "";
