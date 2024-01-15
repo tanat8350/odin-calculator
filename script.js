@@ -107,8 +107,7 @@ body.addEventListener("keydown", (e) => {
   if (key === "Delete") clearCal();
   if (key === "Backspace") delChar();
   if (key === "Enter") calculate();
-  if (key === "+" || key === "-" || key === "*" || key === "/")
-    addOperator(key);
+  if ("+-*/".includes(key)) addOperator(key);
   if (key === ".") appendDecimal();
   if (key >= 0 && key <= 9) appendNumber(key);
 });
