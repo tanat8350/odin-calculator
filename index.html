@@ -12,8 +12,8 @@
   <h1>Odin Calculator</h1>
 
   <div>
-    <input id="calculator" type="text">
-    <p id="calculator-p"></p>
+    <p id="cal-latest"></p>
+    <p id="cal-display"></p>
   </div>
 
   <div id="button-container">
@@ -21,33 +21,34 @@
       <button>7</button>
       <button>8</button>
       <button>9</button>
-      <button> / </button>
+      <button class="js-operator">/</button>
     </div>
 
     <div>
       <button>4</button>
       <button>5</button>
       <button>6</button>
-      <button> * </button>
+      <button class="js-operator">*</button>
     </div>
 
     <div>
       <button>1</button>
       <button>2</button>
       <button>3</button>
-      <button> - </button>
+      <button class="js-operator">-</button>
     </div>
 
     <div>
       <button>0</button>
-      <button>.</button>
-      <button>=</button>
-      <button> + </button>
+      <button class="js-decimal">.</button>
+      <button class="js-equal">=</button>
+      <button class="js-operator">+</button>
     </div>
-  </div>
 
-  <div>
-    <button>Clear</button>
+    <div>
+      <button id="del-btn">Delete</button>
+      <button id="clear-btn">Clear</button>
+    </div>
   </div>
 </body>
 
