@@ -63,7 +63,11 @@ function appendNumber(num) {
     calDisplay.textContent = num;
     calDisplay.classList.remove("js-result");
   } else {
-    calDisplay.textContent += num;
+    if (calDisplay.textContent === "0") {
+      calDisplay.textContent = num;
+    } else {
+      calDisplay.textContent += num;
+    }
   }
 }
 
